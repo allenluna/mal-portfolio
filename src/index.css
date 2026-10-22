@@ -1,0 +1,47 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --bg-2: #111111;
+  --bg-3: #1a1a1a;
+  --fg: #f0ede8;
+  --fg-muted: #888;
+  --fg-dim: #444;
+  --accent: #e8d5b0;
+  --accent-2: #c9a96e;
+  --border: #222;
+  --mono: 'DM Mono', monospace;
+  --sans: 'Syne', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent-2);
+  color: var(--bg);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--fg-dim);
+  border-radius: 2px;
+}
