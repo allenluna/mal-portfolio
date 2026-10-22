@@ -325,7 +325,7 @@ function Skills() {
 function Contact() {
   const [ref, inView] = useInView(0.1)
   const [copied, setCopied] = useState(false)
-  const email = 'markallenluna@email.com'
+  const email = 'allenluna1111@gmail.com'
 
   const copy = () => {
     navigator.clipboard.writeText(email)
