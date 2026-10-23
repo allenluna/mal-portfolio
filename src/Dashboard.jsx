@@ -21,7 +21,7 @@ const TIMELINE = [
   {
     role: 'Senior Software Developer',
     company: 'VXI Global Solutions',
-    period: 'Jan 2024 – Present · 1 yr+',
+    period: 'Jan 2024 – Present · 2 yrs 8 mos',
     active: true,
   },
   {
