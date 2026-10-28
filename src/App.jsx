@@ -7,6 +7,21 @@ const NAV_LINKS = ['home', 'about', 'projects', 'skills', 'contact']
 const PROJECTS = [
   {
     num: '01',
+    title: 'NexusERP',
+    desc: 'An ERP system that brings business operations into one place, including employee and attendance management, customer and supplier records, inventory, sales and purchase orders, invoices, and expense tracking.',
+    stack: ['React', 'Vite', 'Django'],
+    year: '2026',
+    images: [
+      {
+        src: '/images/nexus-erp-dashboard.png',
+        alt: 'NexusERP dashboard showing finance metrics, revenue and expense chart, low-stock alerts, and recent activity',
+        label: 'NexusERP dashboard',
+      },
+    ],
+    link: 'https://nexus-erp-system-yrkz.vercel.app/',
+  },
+  {
+    num: '02',
     title: 'VXI Recruitment CRM & AI Chatbot',
     desc: 'A recruitment CRM that automatically saves applicant information collected through Facebook Messenger, manages applicant conversations, and uses Dialogflow CX and Vertex AI to generate AI-powered replies to questions outside the standard chatbot flow.',
     stack: [
@@ -34,7 +49,7 @@ const PROJECTS = [
     link: '#',
   },
   {
-    num: '02',
+    num: '03',
     title: 'Coaching Quality Analysis Platform',
     desc: 'A coaching quality dashboard for reviewing coaching records, tracking quality scores, and surfacing trends across teams. Integrated with Vertex AI to analyze coaching records and generate quality insights.',
     stack: ['Django', 'React', 'JavaScript', 'Vite', 'PostgreSQL', 'Vertex AI'],
@@ -49,7 +64,7 @@ const PROJECTS = [
     link: '#',
   },
   {
-    num: '03',
+    num: '04',
     title: 'Memo Tracker',
     desc: 'A memo management app for assigning memos, tracking pending acknowledgements, and reviewing completed records from a centralized dashboard.',
     stack: ['Django', 'React', 'JavaScript', 'Vite', 'PostgreSQL'],
@@ -64,7 +79,7 @@ const PROJECTS = [
     link: '#',
   },
   {
-    num: '04',
+    num: '05',
     title: 'Document Shipment Tracker',
     desc: 'A shipment tracking dashboard for monitoring document transmittals and returns, with shipment records, courier and site breakdowns, and reporting views.',
     stack: ['Django', 'React', 'JavaScript', 'Vite', 'PostgreSQL'],
@@ -83,6 +98,7 @@ const PROJECTS = [
 const PROJECT_IMAGES = PROJECTS.flatMap(project =>
   project.images.map(image => ({ ...image, projectTitle: project.title }))
 )
+const PROJECTS_PER_PAGE = 4
 
 const SKILLS = [
   { category: 'Languages', items: ['JavaScript', 'TypeScript', 'Python', 'SQL'] },
@@ -171,7 +187,13 @@ function Hero() {
 function Projects() {
   const [ref, inView] = useInView(0.05)
   const [activeImage, setActiveImage] = useState(null)
+  const [currentPage, setCurrentPage] = useState(1)
   const imageDialogRef = useRef(null)
+  const pageCount = Math.ceil(PROJECTS.length / PROJECTS_PER_PAGE)
+  const visibleProjects = PROJECTS.slice(
+    (currentPage - 1) * PROJECTS_PER_PAGE,
+    currentPage * PROJECTS_PER_PAGE
+  )
 
   useEffect(() => {
     if (activeImage !== null && !imageDialogRef.current.open) {
@@ -190,12 +212,53 @@ function Projects() {
   return (
     <section id="projects" className="section projects" ref={ref}>
       <div className={`section__inner ${inView ? 'reveal' : ''}`}>
-        <div className="section__header">
-          <span className="mono-label">02. projects</span>
-          <h2 className="section__title">Selected Work</h2>
+        <div className="projects__header-row">
+          <div className="section__header">
+            <span className="mono-label">02. projects</span>
+            <h2 className="section__title">Selected Work</h2>
+          </div>
+          {pageCount > 1 && (
+            <nav className="projects__pagination" aria-label="Project pages">
+              <button
+                type="button"
+                className="projects__page-button"
+                onClick={() => setCurrentPage(page => Math.max(1, page - 1))}
+                disabled={currentPage === 1}
+                aria-label="Previous projects"
+              >
+                ← Previous
+              </button>
+              <div className="projects__page-numbers">
+                {Array.from({ length: pageCount }, (_, index) => {
+                  const page = index + 1
+                  return (
+                    <button
+                      key={page}
+                      type="button"
+                      className={`projects__page-button ${currentPage === page ? 'projects__page-button--active' : ''}`}
+                      onClick={() => setCurrentPage(page)}
+                      aria-label={`Page ${page}`}
+                      aria-current={currentPage === page ? 'page' : undefined}
+                    >
+                      {page}
+                    </button>
+                  )
+                })}
+              </div>
+              <button
+                type="button"
+                className="projects__page-button projects__page-button--next"
+                onClick={() => setCurrentPage(page => Math.min(pageCount, page + 1))}
+                disabled={currentPage === pageCount}
+                aria-label="Next projects"
+              >
+                Next →
+              </button>
+            </nav>
+          )}
         </div>
         <div className="projects__grid">
-          {PROJECTS.map((p, i) => (
+          {visibleProjects.map((p, i) => (
             <div
               key={p.num}
               className="project-card"
@@ -212,6 +275,16 @@ function Projects() {
                   <span key={s} className="tag">{s}</span>
                 ))}
               </div>
+              {p.link !== '#' && (
+                <a
+                  className="project-card__live-link"
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open live app ↗
+                </a>
+              )}
               {p.images && (
                 <div className={`project-card__gallery ${p.images.length === 1 ? 'project-card__gallery--single' : ''}`}>
                   {p.images.map(image => (

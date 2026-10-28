@@ -269,6 +269,13 @@
 }
 
 /* ── PROJECTS ───────────────────────────────── */
+.projects__header-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
 .projects__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
@@ -287,6 +294,44 @@
 }
 .project-card:hover {
   background: var(--bg-3);
+}
+.projects__pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.projects__page-numbers {
+  display: flex;
+  gap: 0.5rem;
+}
+.projects__page-button {
+  min-width: 2.5rem;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  background: var(--bg-2);
+  color: var(--fg-muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+.projects__page-button:not(:disabled):hover,
+.projects__page-button--active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.projects__page-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.projects__page-button--next:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+.projects__page-button--next:not(:disabled):hover {
+  background: var(--accent-2);
 }
 .project-card__top {
   display: flex;
@@ -320,6 +365,20 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.25rem;
+}
+.project-card__live-link {
+  width: fit-content;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+.project-card__live-link:hover,
+.project-card__live-link:focus-visible {
+  color: var(--accent-2);
+  border-color: currentColor;
 }
 .project-card__gallery {
   display: grid;
@@ -542,6 +601,7 @@
   .hero { padding: 0 1.5rem; min-height: 100svh; }
   .section { padding: 5rem 1.5rem; }
   .projects__grid { grid-template-columns: 1fr; }
+  .projects__header-row { align-items: flex-start; flex-direction: column; }
   .project-card__gallery { grid-template-columns: 1fr; }
   .skills__grid { grid-template-columns: 1fr 1fr; }
   .footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
