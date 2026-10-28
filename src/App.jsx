@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import './App.css'
-import Dashboard from './Dashboard'
+import About from './About'
 
-const NAV_LINKS = ['about', 'dashboard', 'projects', 'skills', 'contact']
+const NAV_LINKS = ['home', 'about', 'projects', 'skills', 'contact']
 
 const PROJECTS = [
   {
@@ -115,7 +115,7 @@ function Navbar({ active }) {
 
   return (
     <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <a href="#about" className="navbar__logo">
+      <a href="#home" className="navbar__logo">
         <span className="logo-mark">MAL</span>
       </a>
       <ul className="navbar__links">
@@ -137,7 +137,7 @@ function Navbar({ active }) {
 function Hero() {
   const [ref, inView] = useInView(0.1)
   return (
-    <section id="about" className="hero" ref={ref}>
+    <section id="home" className="hero" ref={ref}>
       <div className={`hero__inner ${inView ? 'reveal' : ''}`}>
         <div className="hero__tag">
           <span className="dot" /> Available for work
@@ -374,7 +374,7 @@ function Footer() {
 }
 
 export default function App() {
-  const [active, setActive] = useState('about')
+  const [active, setActive] = useState('home')
 
   useEffect(() => {
     const obs = new IntersectionObserver(
@@ -397,7 +397,7 @@ export default function App() {
       <Navbar active={active} />
       <main>
         <Hero />
-        <Dashboard />
+        <About />
         <Projects />
         <Skills />
         <Contact />

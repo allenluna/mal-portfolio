@@ -16,11 +16,20 @@
 .db-header {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   padding: 20px 24px;
   background: var(--bg-2);
   border: 1px solid var(--border);
   border-radius: 12px;
+}
+.db-profile-image {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 28%;
 }
 .db-avatar {
   width: 52px;
@@ -110,6 +119,20 @@
   text-transform: uppercase;
   margin-bottom: 16px;
 }
+.db-section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.db-about-card {
+  padding: 22px 24px;
+}
+.db-about-copy {
+  max-width: 900px;
+  color: var(--fg-muted);
+  font-size: 0.92rem;
+  line-height: 1.85;
+}
 
 /* Row layouts */
 .db-row2 {
@@ -166,13 +189,6 @@
   transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Radar chart */
-.db-chart-wrap {
-  position: relative;
-  width: 100%;
-  height: 220px;
-}
-
 /* Stack pills */
 .db-stack-group { margin-bottom: 12px; }
 .db-stack-group:last-child { margin-bottom: 0; }
@@ -219,4 +235,6 @@
   .db-section { padding: 5rem 1.5rem; }
   .db-metrics { grid-template-columns: repeat(2, 1fr); }
   .db-row2, .db-row3 { grid-template-columns: 1fr; }
+  .db-header { padding: 18px; }
+  .db-profile-image { width: 64px; height: 64px; }
 }
